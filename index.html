@@ -65,16 +65,9 @@
             </div>
           </div>
 
-          <!-- FIPE PILL -->
-          <div class="fipe-pill hidden" id="fipePill">
-            <span class="fipe-pill__lbl">Valor FIPE</span>
-            <span class="fipe-pill__val" id="fipeVal"></span>
-            <span class="fipe-pill__spin hidden" id="fipeSpin">consultando…</span>
-          </div>
-
           <!-- CONDITION -->
           <div class="cond-row">
-            <span class="fl">Condição</span>
+            <span class="fl">Condição do seu carro</span>
             <div class="cond-btns" id="condBtns">
               <button type="button" class="cb" data-val="otimo">Ótimo</button>
               <button type="button" class="cb active" data-val="bom">Bom</button>
@@ -83,13 +76,33 @@
             </div>
           </div>
 
-          <!-- EXTRA BUDGET -->
-          <div class="budget-row">
-            <label class="fl" for="iExtra">Quanto a mais você quer investir?</label>
-            <div class="money-wrap">
-              <span class="money-pfx">R$</span>
-              <input id="iExtra" class="fi money-fi" type="text" inputmode="numeric" placeholder="0" autocomplete="off" />
+          <!-- LIVE BUDGET CALC -->
+          <div class="calc-box" id="calcBox">
+
+            <!-- row: fipe + extra -->
+            <div class="calc-row">
+              <div class="calc-col">
+                <span class="calc-lbl" id="calcFipeLbl">Valor FIPE</span>
+                <span class="calc-val" id="calcFipeVal">
+                  <span class="calc-loading" id="calcLoading">consultando…</span>
+                </span>
+              </div>
+              <span class="calc-plus">+</span>
+              <div class="calc-col calc-col--input">
+                <span class="calc-lbl">Investimento extra</span>
+                <div class="money-wrap">
+                  <span class="money-pfx">R$</span>
+                  <input id="iExtra" class="fi money-fi" type="text" inputmode="numeric" placeholder="0" autocomplete="off" />
+                </div>
+              </div>
             </div>
+
+            <!-- divider + total -->
+            <div class="calc-total-row">
+              <span class="calc-total-lbl">Sua faixa de compra</span>
+              <span class="calc-total-val" id="calcTotal">—</span>
+            </div>
+
           </div>
 
           <!-- ERROR MSG -->

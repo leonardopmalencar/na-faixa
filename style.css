@@ -181,31 +181,65 @@ a{text-decoration:none;color:inherit}
   cursor:default;text-align:center;padding:14px;
 }
 
-/* ── FIPE PILL ───────────────────────────────────────────────── */
-.fipe-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 14px;
-  background:var(--bg);
-  border:1px solid var(--bdr);
-  border-radius:100px;
-  margin-bottom:14px;
-}
-.fipe-pill.hidden{display:none}
-.fipe-pill__lbl{
-  font-size:.63rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-}
-.fipe-pill__val{
-  font-family:"Instrument Serif",serif;
-  font-size:1rem;letter-spacing:-.01em;
-}
-.fipe-pill__spin{font-size:.73rem;color:var(--muted);font-style:italic}
-.fipe-pill__spin.hidden{display:none}
 
 /* ── SEP ─────────────────────────────────────────────────────── */
 .sep{height:1px;background:var(--bdr);margin:14px 0}
+
+/* ── CALC BOX ────────────────────────────────────────────────── */
+.calc-box{
+  margin-top:16px;
+  background:var(--bg);
+  border:1px solid var(--bdr);
+  border-radius:14px;
+  overflow:hidden;
+}
+.calc-row{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:0;
+  padding:16px 18px;
+}
+.calc-col{display:flex;flex-direction:column;gap:4px}
+.calc-col--input{}
+.calc-lbl{
+  font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);
+}
+.calc-val{
+  font-family:"Instrument Serif",serif;
+  font-size:1.35rem;letter-spacing:-.02em;line-height:1.1;
+  min-height:1.6rem;
+}
+.calc-loading{
+  font-family:"DM Sans",sans-serif;
+  font-size:.78rem;color:var(--muted);font-style:italic;font-weight:400;
+}
+.calc-plus{
+  font-family:"Instrument Serif",serif;
+  font-size:1.4rem;color:var(--muted);
+  padding:0 14px;line-height:1;
+  align-self:flex-end;padding-bottom:2px;
+}
+.calc-total-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 18px;
+  background:var(--ink);
+  border-top:1px solid var(--bdr);
+}
+.calc-total-lbl{
+  font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+}
+.calc-total-val{
+  font-family:"Instrument Serif",serif;
+  font-size:1.5rem;letter-spacing:-.03em;
+  color:#F7F3EC;line-height:1;
+}
 
 /* ── CONDITION ───────────────────────────────────────────────── */
 .cond-row{margin-bottom:14px}
@@ -224,28 +258,26 @@ a{text-decoration:none;color:inherit}
 .cb:hover{border-color:var(--ink);color:var(--ink);border-radius:9px}
 .cb.active{background:var(--ink);border-color:var(--ink);color:var(--bg);border-radius:9px}
 
-/* ── BUDGET ──────────────────────────────────────────────────── */
-.budget-row{margin-bottom:16px}
+/* ── MONEY INPUT ─────────────────────────────────────────────── */
 .money-wrap{
   display:flex;
   align-items:center;
-  background:var(--bg);
-  border:1.5px solid transparent;
+  background:#fff;
+  border:1.5px solid var(--bdr);
   border-radius:9px;
   overflow:hidden;
-  max-width:300px;
   transition:border-color .18s;
 }
-.money-wrap:focus-within{border-color:var(--ink);background:#fff}
+.money-wrap:focus-within{border-color:var(--ink)}
 .money-pfx{
-  padding:10px 0 10px 13px;
-  font-size:.88rem;font-weight:700;
+  padding:9px 0 9px 12px;
+  font-size:.85rem;font-weight:700;
   color:var(--muted);flex-shrink:0;
 }
 .money-fi{
   border:none !important;background:transparent !important;
-  border-radius:0 !important;padding-left:5px !important;
-  font-size:1rem !important;font-weight:600;flex:1;min-width:0;
+  border-radius:0 !important;padding-left:4px !important;
+  font-size:.95rem !important;font-weight:600;flex:1;min-width:0;
 }
 .money-fi:focus{background:transparent !important}
 

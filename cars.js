@@ -82,8 +82,8 @@ const CARROS_0KM = [
 
 // Quanto % do valor FIPE o carro vale na troca, por condição
 const MULT_CONDICAO = {
-  otimo:  0.95,
-  bom:    0.82,
-  regular:0.65,
-  ruim:   0.45,
+  otimo:   1.00,  // 100% — baixa km, sem reparos, revisões em dia
+  bom:     0.88,  //  88% — desgaste normal de uso
+  regular: 0.72,  //  72% — desgaste visível, pequenos reparos pendentes
+  ruim:    0.50,  //  50% — problema mecânico/estético relevante
 };

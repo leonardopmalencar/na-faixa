@@ -127,27 +127,41 @@ const acAno = AC("iAno", "drAno", {
 // ── FIPE PRICE ────────────────────────────────────────────────────
 async function loadFipe() {
   if (!S.marcaCod || !S.modeloCod || !S.anoCod) return;
-  showPillLoading();
+  // show loading state in calc box
+  document.getElementById("calcLoading").style.display = "";
+  document.getElementById("calcFipeVal").dataset.ready = "";
+  updateCalc();
   try {
     const d = await fipePreco(S.marcaCod, S.modeloCod, S.anoCod);
     S.fipeVal = parseFipeValue(d.Valor);
-    showPillValue(d.Valor);
-  } catch { hidePill(); }
+    document.getElementById("calcLoading").style.display = "none";
+    document.getElementById("calcFipeVal").dataset.ready = "1";
+    updateCalc();
+  } catch {
+    S.fipeVal = 0;
+    document.getElementById("calcLoading").textContent = "não encontrado";
+    updateCalc();
+  }
 }
 
-function showPillLoading() {
-  const p = document.getElementById("fipePill");
-  p.classList.remove("hidden");
-  document.getElementById("fipeVal").textContent = "";
-  document.getElementById("fipeSpin").classList.remove("hidden");
-}
-function showPillValue(v) {
-  document.getElementById("fipeVal").textContent = v;
-  document.getElementById("fipeSpin").classList.add("hidden");
-}
-function hidePill() {
-  document.getElementById("fipePill").classList.add("hidden");
-  S.fipeVal = 0;
+// ── LIVE CALC ─────────────────────────────────────────────────────
+const COND_LABELS = { otimo:"Ótimo · 100%", bom:"Bom · 88%", regular:"Regular · 72%", ruim:"Com defeito · 50%" };
+
+function updateCalc() {
+  const tradeIn  = S.fipeVal > 0 ? Math.round(S.fipeVal * MULT_CONDICAO[S.condicao]) : 0;
+  const extra    = getExtra();
+  const total    = tradeIn + extra;
+  const fipeEl   = document.getElementById("calcFipeVal");
+  const lbl      = document.getElementById("calcFipeLbl");
+  const totalEl  = document.getElementById("calcTotal");
+
+  // FIPE column
+  lbl.textContent = `Valor FIPE · ${COND_LABELS[S.condicao]}`;
+  if (S.fipeVal > 0) {
+    fipeEl.textContent = brl(tradeIn);
+  }
+  // total
+  totalEl.textContent = total > 0 ? brl(total) : "—";
 }
 
 // ── CONDITION ─────────────────────────────────────────────────────
@@ -157,6 +171,7 @@ document.getElementById("condBtns").addEventListener("click", e => {
   document.querySelectorAll(".cb").forEach(x => x.classList.remove("active"));
   b.classList.add("active");
   S.condicao = b.dataset.val;
+  updateCalc();
 });
 
 // ── MONEY INPUT ───────────────────────────────────────────────────
@@ -164,6 +179,7 @@ const iExtra = document.getElementById("iExtra");
 iExtra.addEventListener("input", () => {
   const raw = iExtra.value.replace(/\D/g, "");
   iExtra.value = raw ? Number(raw).toLocaleString("pt-BR") : "";
+  updateCalc();
 });
 const getExtra = () => parseInt(iExtra.value.replace(/\D/g,""), 10) || 0;
 
