@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Na Faixa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- APP SHELL (single viewport) -->
+  <div class="shell" id="shell">
+
+    <!-- NAV -->
+    <nav class="nav">
+      <span class="logo">Na Faixa</span>
+      <span class="nav__tag">tabela fipe · brasil</span>
+    </nav>
+
+    <!-- SPLIT LAYOUT -->
+    <div class="split">
+
+      <!-- LEFT — TITLE -->
+      <div class="split__left">
+        <p class="kicker">descubra</p>
+        <h1 class="title">
+          O que está<br>
+          <em>na sua faixa?</em>
+        </h1>
+        <p class="subtitle">
+          Informe seu carro atual e quanto<br>
+          a mais você quer investir.
+        </p>
+      </div>
+
+      <!-- RIGHT — FORM -->
+      <div class="split__right">
+        <form class="card" id="mainForm" autocomplete="off" novalidate>
+
+          <!-- CAR FIELDS -->
+          <div class="row3">
+            <div class="fg" id="fg-marca">
+              <label class="fl">Marca</label>
+              <div class="ac-wrap">
+                <input id="iMarca" class="fi" type="text" placeholder="ex: Toyota" autocomplete="off" />
+                <ul class="ac-drop" id="drMarca"></ul>
+              </div>
+            </div>
+            <div class="fg fg--grow" id="fg-modelo">
+              <label class="fl">Modelo</label>
+              <div class="ac-wrap">
+                <input id="iModelo" class="fi" type="text" placeholder="— selecione a marca primeiro" autocomplete="off" disabled />
+                <ul class="ac-drop" id="drModelo"></ul>
+              </div>
+            </div>
+            <div class="fg fg--sm" id="fg-ano">
+              <label class="fl">Ano</label>
+              <div class="ac-wrap">
+                <input id="iAno" class="fi" type="text" placeholder="—" autocomplete="off" disabled />
+                <ul class="ac-drop" id="drAno"></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- FIPE PILL -->
+          <div class="fipe-pill hidden" id="fipePill">
+            <span class="fipe-pill__lbl">Valor FIPE</span>
+            <span class="fipe-pill__val" id="fipeVal"></span>
+            <span class="fipe-pill__spin hidden" id="fipeSpin">consultando…</span>
+          </div>
+
+          <!-- CONDITION -->
+          <div class="cond-row">
+            <span class="fl">Condição</span>
+            <div class="cond-btns" id="condBtns">
+              <button type="button" class="cb" data-val="otimo">Ótimo</button>
+              <button type="button" class="cb active" data-val="bom">Bom</button>
+              <button type="button" class="cb" data-val="regular">Regular</button>
+              <button type="button" class="cb" data-val="ruim">Com defeito</button>
+            </div>
+          </div>
+
+          <!-- EXTRA BUDGET -->
+          <div class="budget-row">
+            <label class="fl" for="iExtra">Quanto a mais você quer investir?</label>
+            <div class="money-wrap">
+              <span class="money-pfx">R$</span>
+              <input id="iExtra" class="fi money-fi" type="text" inputmode="numeric" placeholder="0" autocomplete="off" />
+            </div>
+          </div>
+
+          <!-- ERROR MSG -->
+          <p class="form-err hidden" id="formErr"></p>
+
+          <!-- SUBMIT -->
+          <button type="submit" class="btn-go" id="btnGo">
+            <span>Ver o que está na faixa</span>
+            <span class="btn-go__arr">→</span>
+          </button>
+
+        </form>
+      </div>
+    </div><!-- /split -->
+
+    <!-- FOOTER (inside shell, bottom) -->
+    <footer class="foot">
+      <span>© 2025 Na Faixa</span>
+      <span>Preços referência Tabela Fipe · somente carros 0km</span>
+    </footer>
+
+  </div><!-- /shell -->
+
+  <!-- RESULTS (outside shell, appears after search) -->
+  <section class="results hidden" id="results">
+    <div class="res-head">
+      <button class="btn-back" id="btnBack">← nova busca</button>
+      <div class="res-budget" id="resBudget"></div>
+      <h2 class="res-title">Na sua faixa</h2>
+      <p class="res-meta" id="resMeta"></p>
+    </div>
+    <div class="res-grid" id="resGrid"></div>
+    <p class="res-empty hidden" id="resEmpty">
+      Nenhum carro 0km encontrado nessa faixa. Tente aumentar seu investimento.
+    </p>
+    <footer class="foot foot--results">
+      <span>© 2025 Na Faixa</span>
+      <span>Preços referência Tabela Fipe · somente carros 0km</span>
+    </footer>
+  </section>
+
+  <script src="fipe.js"></script>
+  <script src="cars.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
