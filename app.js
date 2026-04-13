@@ -85,10 +85,9 @@ const acMarca = AC("iMarca", "drMarca", {
     S.marcaCod = it.cod;
     S.modeloCod = null; S.anoCod = null; S.fipeVal = 0;
     acModelo.clear(); acAno.clear();
-    hidePill();
+    updateCalc();
 
-    acModelo.enable("carregando…");
-    document.getElementById("iModelo").disabled = true;
+    acModelo.disable("carregando modelos…");
     const mods = await fipeModelos(it.cod);
     window._mods = mods;
     acModelo.enable("digite o modelo");
@@ -102,7 +101,7 @@ const acModelo = AC("iModelo", "drModelo", {
   onPick: async it => {
     S.modeloCod = it.cod;
     S.anoCod = null; S.fipeVal = 0;
-    acAno.clear(); hidePill();
+    acAno.clear(); updateCalc();
 
     acAno.disable("carregando…");
     const anos = await fipeAnos(S.marcaCod, it.cod);
