@@ -216,6 +216,7 @@ a{text-decoration:none;color:inherit}
   font-family:"DM Sans",sans-serif;
   font-size:.78rem;color:var(--muted);font-style:italic;font-weight:400;
 }
+.calc-loading.hidden,.hidden{display:none}
 .calc-plus{
   font-family:"Instrument Serif",serif;
   font-size:1.4rem;color:var(--muted);

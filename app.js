@@ -126,15 +126,15 @@ const acAno = AC("iAno", "drAno", {
 // ── FIPE PRICE ────────────────────────────────────────────────────
 async function loadFipe() {
   if (!S.marcaCod || !S.modeloCod || !S.anoCod) return;
-  // show loading state in calc box
-  document.getElementById("calcLoading").style.display = "";
-  document.getElementById("calcFipeVal").dataset.ready = "";
+  S.fipeVal = 0;
+  document.getElementById("calcFipeVal").textContent = "";
+  document.getElementById("calcLoading").textContent = "consultando…";
+  document.getElementById("calcLoading").classList.remove("hidden");
   updateCalc();
   try {
     const d = await fipePreco(S.marcaCod, S.modeloCod, S.anoCod);
     S.fipeVal = parseFipeValue(d.Valor);
-    document.getElementById("calcLoading").style.display = "none";
-    document.getElementById("calcFipeVal").dataset.ready = "1";
+    document.getElementById("calcLoading").classList.add("hidden");
     updateCalc();
   } catch {
     S.fipeVal = 0;
@@ -156,9 +156,7 @@ function updateCalc() {
 
   // FIPE column
   lbl.textContent = `Valor FIPE · ${COND_LABELS[S.condicao]}`;
-  if (S.fipeVal > 0) {
-    fipeEl.textContent = brl(tradeIn);
-  }
+  fipeEl.textContent = S.fipeVal > 0 ? brl(tradeIn) : "—";
   // total
   totalEl.textContent = total > 0 ? brl(total) : "—";
 }
